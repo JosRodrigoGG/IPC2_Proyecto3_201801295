@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<div id="test2" class="col s12">
+    <div class="row center-align">
+        <div class="col s12">
+            <h5 class="center-align colorTitulo"><b>Resumen de IVA</b></h5>
+        </div>
+        <div class="col s12 valign-wrapper">
+            <div class="col s3">
+                <input id="fechaUnica" name="fechaUnica" type="text"
+                       class="datepicker" value="{{ fechaUnica }}">
+                <label for="fechaUnica">Fecha</label>
+            </div>
+            <div class="col s4">
+                <button class="btn waves-effect waves-light reset" type="submit" name="action">
+                    Buscar
+                    <i class="material-icons right">search</i>
+                </button>
+            </div>
+            <div class="col s5">
+                <span class="colorTitulo"><b>{{ mensajeIVA }}</b></span>
+            </div>
+        </div>
+        <div class="col s12">
+            <br>
+        </div>
+        <div class="col s8 offset-s2 center-align">
+            <div class="col s6">
+                {% if datosIVA %}
+                    <span class="colorSubTitulo"><b>Grafica de movimientos</b></span>
+                {% endif %}
+                <div class="col s12">
+                    {% if datosIVA %}
+                        {% if  datosIVAX %}
+                            {% if  datosIVAY %}
+                                <canvas id="graficaIVA" width="500" height="500"></canvas>
+                                <script>
+                                    const ctx = document.getElementById('graficaIVA').getContext('2d');
+                                    const myChart = new Chart(ctx, {
+                                        type: 'line',
+                                        data: {
+                                            labels: {{ datosIVAX }},
+                                            datasets: [
+                                                {
+                                                    label: 'MONTO',
+                                                    data: {{ datosIVAY2 }},
+                                                    stack: 'combined',
+                                                    borderColor: '#B97A95',
+                                                    backgroundColor: '#B97A95',
+                                                    type: 'bar'
+                                                },
+                                                {
+                                                    label: 'IVA',
+                                                    data: {{ datosIVAY }},
+                                                    borderColor: '#F6AE99',
+                                                    backgroundColor: '#F6AE99',
+                                                    stack: 'combined'
+                                                }
+                                            ]
+                                        },
+                                        options: {
+                                            plugins: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Resumen de IVA'
+                                                }
+                                            },
+                                            scales: {
+                                                y: {
+                                                    stacked: true
+                                                }
+                                            }
+                                        },
+                                    });
+                                </script>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col s6">
+                {% if datosIVA %}
+                    <span class="colorSubTitulo"><b>Detalle de IVA</b></span>
+                {% endif %}
+                <div class="col s12">
+                    {% if datosIVA %}
+                        <table class="striped responsive-table">
+                            <thead>
+                            <tr>
+                                <th>FECHA</th>
+                                <th>NIT EMISOR</th>
+                                <th>MONTO</th>
+                                <th>IVA</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for temp in datosIVA %}
+                                <tr>
+                                    <td>{{ temp.FECHA }}</td>
+                                    <td>{{ temp.NIT_EMISOR }}</td>
+                                    <td>Q.{{ temp.MONTO }}</td>
+                                    <td>Q.{{ temp.IVA }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script rel="script" src="{% static 'js/js.js' %}"></script>
+</body>
+</html>

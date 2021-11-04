@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<div id="test3" class="col s12">
+    <div class="row center-align">
+        <div class="col s12">
+            <h5 class="center-align colorTitulo"><b>Resumen por fecha</b></h5>
+        </div>
+        <form action="/resumen/Fecha/" method="get" enctype="multipart/form-data">{% csrf_token %}
+            <div class="col s12 valign-wrapper">
+                <div class="col s4">
+                    <input id="fechaInicio" name="fechaInicio" value="{{ fechaInicio }}" type="text"
+                           class="datepicker">
+                    <label for="fechaInicio">Fecha inicio</label>
+                </div>
+                <div class="col s4">
+                    <input id="fechaFin" name="fechaFin" value="{{ fechaFin }}" type="text"
+                           class="datepicker">
+                    <label for="fechaFin">Fecha fin</label>
+                </div>
+                <div class="col s4">
+                    <span class="colorSubTitulo"><b>Tipo de valores</b></span>
+                    <p>
+                        <label>
+                            <input class="with-gap" name="estado" value="2" type="radio" checked>
+                            <span class="colorLabelRadio">Total</span>
+                        </label>
+                        <label>
+                            <input class="with-gap" name="estado" value="1" type="radio">
+                            <span class="colorLabelRadio">Sin IVA</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="col s4">
+                    <button class="btn waves-effect waves-light reset" type="submit" name="action">Buscar
+                        <i class="material-icons right">search</i>
+                    </button>
+                </div>
+                <span class="colorTitulo"><b>{{ mensajeFecha }}</b></span>
+            </div>
+        </form>
+        <div class="col s12">
+            <br>
+        </div>
+        <div class="col s8 offset-s2 center-align">
+            <div class="col s6">
+                {% if datosFecha %}
+                    <span class="colorSubTitulo"><b>Grafica de movimientos</b></span>
+                {% endif %}
+                <div class="col s12">
+                    {% if datosFecha %}
+                        {% if  datosFechaY %}
+                            <canvas id="graficaFecha" width="500" height="500"></canvas>
+                            <script>
+                                const ctx = document.getElementById('graficaFecha').getContext('2d');
+                                const myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: {{ datosFechaX }},
+                                        datasets: [{
+                                            label: 'Resumen del IVA',
+                                            data: {{ datosFechaY }},
+                                            backgroundColor: [
+                                                '#B97A95'
+                                            ],
+                                            borderColor: [
+                                                '#B97A95'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    }
+                                });
+                            </script>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col s6">
+                {% if datosFecha %}
+                    <span class="colorSubTitulo"><b>Detalles del valor</b></span>
+                {% endif %}
+                <div class="col s12">
+                    {% if datosFecha %}
+                        <table class="striped responsive-table">
+                            <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>FECHA</th>
+                                <th>NIT EMISOR</th>
+                                <th>MONTO</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for temp in datosFecha %}
+                                <tr>
+                                    <td>{{ temp.NO }}</td>
+                                    <td>{{ temp.FECHA }}</td>
+                                    <td>{{ temp.NIT_EMISOR }}</td>
+                                    <td>Q.{{ temp.MONTO }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script rel="script" src="{% static 'js/js.js' %}"></script>
+</body>
+</html>

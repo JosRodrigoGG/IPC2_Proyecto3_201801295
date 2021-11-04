@@ -31,4 +31,6 @@ urlpatterns = [
     path('archivoConsulta/', archivoConsulta),
     path('resumen/IVA/', resumenIVA),
     path('resumen/Fecha/', resumenFecha),
+    path('archivoIVA/', archivoIVA),
+    path('archivoFECHA/', archivoFecha),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
