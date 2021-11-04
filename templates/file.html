@@ -1,0 +1,81 @@
+{% extends "template.html" %}
+
+{% block title %}Archivo{% endblock %}
+
+{% block content %}
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large color1" id="ayuda">
+            <i class="large material-icons">playlist_add</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating color3"><i class="material-icons">article</i></a></li>
+            <li><a class="btn-floating sidenav-trigger color2" data-target="slide-out"><i class="material-icons">support_agent</i></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <br>
+            <div class="col s4 offset-s8">
+                <div class="col s6">
+
+                </div>
+                <div class="col s6">
+                    <form action="/reset/" method="put" enctype="multipart/form-data">{% csrf_token %}
+                        <button class="btn waves-effect waves-light reset" type="submit" name="action">Reset
+                            <i class="material-icons right">restart_alt</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col s6">
+                <form action="/cargarArchivo/" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <label>Datos de entrada</label>
+                    <div class="input-field col s12">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>File</span>
+                                <input type="file" name="archivoXML" id="archivoXML">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                        <button class="btn waves-effect waves-light enviar" type="submit"
+                                name="enviarDatos">Enviar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s12">
+                        <span class="colorTitulo"><b>{{ data }}</b></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col s6">
+                <label>Datos de salida</label>
+                <div class="input-field col s12">
+                    <textarea id="textConsulta" class="materialize-textarea">{{ datos }}</textarea>
+                    <label for="textConsulta">Datos cargados</label>
+                    <div class="row center-align">
+                        <div class="col s6">
+                            <form action="/archivoSalida/" method="get" enctype="multipart/form-data">{% csrf_token %}
+                                <button class="btn waves-effect waves-light enviar" type="submit" name="generar">Generar
+                                    <i class="material-icons right">download</i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col s6">
+                            <form action="/buscarDatos/" method="get" enctype="multipart/form-data">{% csrf_token %}
+                                <button class="btn waves-effect waves-light reset" type="submit" name="buscar">Buscar
+                                    <i class="material-icons right">search</i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

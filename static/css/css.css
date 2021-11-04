@@ -1,0 +1,153 @@
+.fondo {
+    width: 100%;
+    height: 100%;
+}
+
+.colorSubTitulo {
+    color: #F6AE99;
+}
+
+.colorBarra {
+    background-color: #716F81;
+}
+
+.color1 {
+    background-color: #716F81;
+}
+
+.color1:hover {
+    background-color: #716F81;
+}
+
+.color1:focus {
+    background-color: #716F81;
+}
+
+.color2 {
+    background-color: #B97A95;
+}
+
+.color2:hover {
+    background-color: #B97A95;
+}
+
+.color2:focus {
+    background-color: #B97A95;
+}
+
+.color3 {
+    background-color: #F6AE99;
+}
+
+.color3:hover {
+    background-color: #F6AE99;
+}
+
+.color3:focus {
+    background-color: #F6AE99;
+}
+
+.enviar {
+    background-color: #F6AE99;
+}
+
+.enviar:hover {
+    background-color: #F6AE99;
+}
+
+.enviar:focus {
+    background-color: #716F81;
+}
+
+.reset {
+    background-color: #B97A95;
+}
+
+.reset:hover {
+    background-color: #B97A95;
+}
+
+.reset:focus {
+    background-color: #716F81;
+}
+
+.input-field label {
+    color: #716F81;
+}
+
+.input-field textarea:focus + label {
+    color: #B97A95 !important;
+}
+
+.row .input-field textarea:focus {
+    border-bottom: 1px solid #B97A95 !important;
+    box-shadow: 0 1px 0 0 #B97A95 !important
+}
+
+.tabs .tab a {
+    color: #716F81;
+}
+
+.tabs .tab a:hover {
+    background-color: #F2E1C1;
+    color: #716F81;
+}
+
+.tabs .tab a.active {
+    background-color: #F2E1C1;
+    color: #716F81;
+}
+
+.tabs .indicator {
+    background-color: #B97A95;
+}
+
+.tabs .tab a:focus.active {
+    color: #716F81;
+    background-color: #F2E1C1;
+}
+
+.colorTitulo {
+    color: #B97A95;
+}
+
+.datepicker-date-display {
+    background-color: #B97A95
+}
+
+.datepicker-day-button:focus {
+    color: white !important;
+    background-color: #F6AE99
+}
+
+.datepicker-done,
+.datepicker-cancel,
+.select-dropdown li > span,
+.is-today {
+    color: #716F81 !important
+}
+
+td.is-selected,
+.month-prev:active,
+.month-prev:focus,
+.month-next:active,
+.month-next:focus {
+    background-color: #F6AE99 !important
+}
+
+.dropdown-content li > span {
+    color: #716F81 !important;
+}
+
+[type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:after {
+    background-color: #B97A95;
+}
+
+[type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+    border: 2px solid #B97A95;
+}
+
+.colorLabelRadio {
+    color: #716F81;
+}

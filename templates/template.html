@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+<ul id="slide-out" class="sidenav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img class="fondo" src="{% static 'image/fondo.jpg' %}">
+            </div>
+            <a><img class="circle" src="{% static 'image/perfil.jpg' %}"></a>
+            <a><span class="white-text name">Jose Rodrigo Garcia Godinez</span></a>
+            <a><span class="white-text email">josrodrigogg@gmail.com</span></a>
+        </div>
+    </li>
+    <li><a class="subheader">201801295</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">IPC2-C</a></li>
+    <li><a class="subheader">USAC</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">GITHUB</a></li>
+    <li><a href="#!"><i class="material-icons">api</i>API</a></li>
+    <li><a href="#!"><i class="material-icons">layers</i>WEB</a></li>
+</ul>
+<nav>
+    <div class="nav-wrapper colorBarra">
+        <a class="brand-logo right">My App</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="/archivo/">Cargar Archivo</a></li>
+            <li><a href="/peticion/">Peticiones</a></li>
+        </ul>
+    </div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+{% block content %} {% endblock %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script rel="script" src="{% static 'js/js.js' %}"></script>
+</body>
+</html>
